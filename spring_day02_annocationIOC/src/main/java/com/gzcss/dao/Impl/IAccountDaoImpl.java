@@ -5,13 +5,18 @@ import com.gzcss.domain.Account;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+
+@Repository("accountDao")
 public class IAccountDaoImpl implements IAccountDao {
 
+    @Autowired
     private QueryRunner queryRunner;
-
 
     public void setQueryRunner(QueryRunner queryRunner) {
         this.queryRunner = queryRunner;
@@ -40,7 +45,7 @@ public class IAccountDaoImpl implements IAccountDao {
     @Override
     public void saveAccount(Account account) {
         try {
-            queryRunner.update("insert into account(?,?) values(?,?)",account.getName(),account.getMoney());
+            queryRunner.update("insert into account(name,money) values(?,?)",account.getName(),account.getMoney());
         }catch (Exception e){
             throw  new RuntimeException(e);
         }

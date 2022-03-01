@@ -1,37 +1,35 @@
 package com.gzcss.test;
 
+import com.gzcss.config.SpringConfiguration;
 import com.gzcss.domain.Account;
 import com.gzcss.service.IAccountService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+
+import javax.swing.*;
 import java.util.List;
 
+
+@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(classes = SpringConfiguration.class)
+@ContextConfiguration(locations = "classpath:bean.xml")
 public class accountTest {
 
-
-
-    private ClassPathXmlApplicationContext as ;
+    @Autowired
     private IAccountService accountService;
 
-    @Before
-    public void init(){
-        as = new ClassPathXmlApplicationContext("bean.xml");
-        accountService = as.getBean("accountService", IAccountService.class);
-    };
-
-    @After
-    public void close(){
-        as.close();
-    };
 
 
     @Test
     public void findAllTest() {
-
         List<Account> all = accountService.findAll();
         for (Account ac: all) {
             System.out.println(ac);
@@ -40,7 +38,8 @@ public class accountTest {
 
     @Test
     public void findOne() {
-       accountService.findById(3);
+        Account one = accountService.findById(3);
+        System.out.println(one);
     }
 
 
@@ -48,7 +47,7 @@ public class accountTest {
     public void savaTest() {
         Account ac =new Account();
         ac.setName("大石页");
-        ac.setMoney(1000.10);
+        ac.setMoney(1000F);
         accountService.saveAccount(ac);
 
     }
@@ -58,7 +57,7 @@ public class accountTest {
         Account ac = new Account();
         ac.setId(3);
         ac.setName("小石页");
-        ac.setMoney(2000.20);
+        ac.setMoney(2000F);
         accountService.updateAccount(ac);
     }
 

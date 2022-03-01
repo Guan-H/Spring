@@ -4,12 +4,18 @@ import com.gzcss.dao.IAccountDao;
 import com.gzcss.dao.Impl.IAccountDaoImpl;
 import com.gzcss.domain.Account;
 import com.gzcss.service.IAccountService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
+@Service("accountService")
 public class IAccountServiceImpl implements IAccountService {
 
+    @Autowired
     private IAccountDao accountDao;
+
 
     public void setAccountDao(IAccountDao accountDao) {
         this.accountDao = accountDao;

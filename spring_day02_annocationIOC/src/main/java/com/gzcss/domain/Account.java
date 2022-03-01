@@ -4,7 +4,7 @@ public class Account {
 
     private Integer id;
     private String name;
-    private Double money;
+    private Float money;
 
     public Integer getId() {
         return id;
@@ -22,11 +22,11 @@ public class Account {
         this.name = name;
     }
 
-    public double getMoney() {
+    public Float getMoney() {
         return money;
     }
 
-    public void setMoney(Double money) {
+    public void setMoney(Float money) {
         this.money = money;
     }
 
